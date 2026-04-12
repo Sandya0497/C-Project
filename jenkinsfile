@@ -13,7 +13,7 @@ pipeline {
              steps{
               withAWS(region: 'ap-south-1', credentials: 'aws-creds'){
                 sh '''
-                 $password = aws ecr get-login-password  --region ap-south-1
+                password=$(aws ecr get-login-password --region ap-south-1)
                  docker login  --username  AWS --password $password 678632989999.dkr.ecr.ap-south-1.amazonaws.com
 
                  '''
