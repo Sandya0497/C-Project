@@ -1,5 +1,9 @@
-FROM maven:3.8.1-openjdk-8 AS build
+FROM centos:8
+
+RUN yum -y update && \
+    yum -y install java-11-openjdk java-11-openjdk-devel maven && \
+    yum clean all
+
 WORKDIR /app
-RUN  yum update 
 COPY pom.xml .
 EXPOSE 8080
