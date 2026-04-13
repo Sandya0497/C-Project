@@ -1,7 +1,7 @@
 FROM maven:3.8.1-openjdk-8 AS build
 WORKDIR /app
 COPY pom.xml .
-RUN mvn package
+RUN mvn -Dhttps.proxyHost=myproxy -Dhttps.proxyPort=8080 package
 
 
 FROM tomcat:9.0.53-jdk8
