@@ -9,11 +9,7 @@ pipeline {
 
                }
              }
-             stage('Build WAR with Maven') {
-  steps {
-    sh 'mvn clean package'
-  }
-}
+     
             stage('Login to ECR'){
              steps{
               withAWS(region: 'ap-south-1', credentials: 'aws-creds'){
