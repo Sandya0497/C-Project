@@ -1,11 +1,5 @@
-# Use official Python image
-FROM python:3.11-slim
-
-# Set working directory
+FROM maven:3.8.1-openjdk-8 AS build
 WORKDIR /app
-
-# Copy script into container
-COPY app.py .
-
-# Run the script
-CMD ["python", "app.py"]
+RUN  yum update 
+COPY pom.xml .
+EXPOSE 8080
