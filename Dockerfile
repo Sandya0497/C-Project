@@ -1,4 +1,11 @@
-FROM tomcat:9.0.53-jdk8
-COPY target/helloworld-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/helloworld.war
-EXPOSE 8080
-CMD ["catalina.sh", "run"]
+# Use official Python image
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Copy script into container
+COPY app.py .
+
+# Run the script
+CMD ["python", "app.py"]
