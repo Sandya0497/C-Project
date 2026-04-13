@@ -1,14 +1,10 @@
-# Use an official OpenJDK runtime as a base image
-FROM openjdk:17-slim
-
-# Set the working directory inside the container
+FROM maven:3.8.1-openjdk-8 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn package
 
-# Copy the JAR file into the container
-COPY target/myapp.jar /app/myapp.jar
-
-# Expose the application port (adjust if needed)
-EXPOSE 8080
-
-# Run the JAR file
-ENTRYPOINT ["java", "-jar", "myapp.jar"]
+FROM tomcat:9.0.53-jdk8
+RUN mkdir -p /usr/local/tomcat/webapps
+RUN chmod -R 777 /usr/local/tomcat/conf
+COPY --from=build /app/target/helloworld-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/helloworld.war
