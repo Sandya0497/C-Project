@@ -12,4 +12,3 @@ EXPOSE 8080
 
 # Start Tomcat
 CMD ["catalina.sh", "run"]
-COPY --from=build /app/target/helloworld-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/helloworld.war
